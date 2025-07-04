@@ -25,17 +25,24 @@ const SignUp = () => {
     e.preventDefault();
 
     if (!fullName) {
-      toast.error("Please enter full name.", { duration: 4000 });
+      toast.error("Please enter full name.", { duration: 3000 });
       return;
     }
 
     if (!validateEmail(email)) {
-      toast.error("Please enter a valid email address.", { duration: 4000 });
+      toast.error("Please enter a valid email address.", { duration: 3000 });
       return;
     }
 
     if (!password) {
-      toast.error("Please enter the password", { duration: 4000 });
+      toast.error("Please enter the password", { duration: 3000 });
+      return;
+    }
+
+    if (password.length < 5) {
+      toast.error("Password must be at least 5 characters long", {
+        duration: 3000,
+      });
       return;
     }
 
@@ -100,14 +107,14 @@ const SignUp = () => {
 
             toast.success("Account created with profile picture!", {
               id: toastId,
-              duration: 3000, 
+              duration: 3000,
             });
           } catch (imageError) {
             console.error("Error uploading profile image:", imageError);
             toast.error(
               "Account created, but failed to upload profile picture. You can try again later.",
               {
-                duration: 3000, 
+                duration: 3000,
               }
             );
             // Still update the user context with the initial user data
@@ -117,7 +124,7 @@ const SignUp = () => {
           // No profile pic, just update the user context
           updateUser(response.data);
           toast.success("Account created successfully!", {
-            duration: 3000, 
+            duration: 3000,
           });
         }
 
@@ -175,7 +182,7 @@ const SignUp = () => {
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               label="Password"
-              placeholder="Min 8 Characters"
+              placeholder="Min 5 Characters"
               type="password"
               disabled={isLoading}
             />
@@ -184,7 +191,7 @@ const SignUp = () => {
               value={adminInviteToken}
               onChange={({ target }) => setAdminInviteToken(target.value)}
               label="Admin Invite Token"
-              placeholder="6 Digit Code"
+              placeholder="458844"
               type="text"
               disabled={isLoading}
             />

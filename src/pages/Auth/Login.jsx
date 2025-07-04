@@ -89,7 +89,7 @@ const Login = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)}
             label="Password"
-            placeholder="Min 8 Characters"
+            placeholder="Min 5 Characters"
             type="password"
             disabled={isLoading}
           />
